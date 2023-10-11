@@ -10,8 +10,15 @@ script:
   - docker run -e CI=true jonny5592/react-test npm test
 
 after_success:
+  # Build Docker Images
   - docker build -t jonny5592/fib-client ./client
   - docker build -t jonny5592/fib-nginx ./nginx
   - docker build -t jonny5592/fib-server ./server
   - docker build -t jonny5592/fib-worker ./worker 
-
+  # Login To Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push Images To Docker Hub
+  - docker push jonny5592/fib-client
+  - docker push jonny5592/fib-nginx
+  - docker push jonny5592/fib-server
+  - docker push jonny5592/fib-worker
