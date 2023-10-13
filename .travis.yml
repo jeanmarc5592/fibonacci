@@ -30,5 +30,7 @@ deploy:
   env: "Fibonacci-env"
   bucket_name: "elasticbeanstalk-us-east-1-879238464235"
   bucket_path: "Fibonacci"
+  on:
+    branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
